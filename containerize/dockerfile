@@ -1,1 +1,0 @@
-FROM public.ecr.aws/datamindedacademy/capstone:v3.4.1-hadoop-3.3.6-v1

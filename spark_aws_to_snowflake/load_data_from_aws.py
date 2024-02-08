@@ -88,9 +88,11 @@ def store_data_in_snowflake(df:DataFrame):
 
     return 0
 
-
+print("Read data from AWS")
 df=read_json_aws(AWS_LOCATION)
-
+print("Clean data ")
 clean_df=clean_air_data(df)
-
+print("Store data in SnowFlake")
 store_data_in_snowflake(clean_df)
+
+print("Done")
