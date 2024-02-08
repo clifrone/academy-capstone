@@ -3,9 +3,16 @@ from pyspark import SparkConf
 import pyspark.sql.types as t
 import pyspark.sql.functions as sf
 
-from pyspark.sql.functions import col
+from pyspark.sql.functions import col,current_timestamp
 
 from pyspark.sql import SparkSession, DataFrame
+
+import logging
+from datetime import datetime
+
+logger = logging.getLogger(__name__)
+logger.addHandler(logging.StreamHandler())
+logger.setLevel(logging.INFO)
 
 AWS_LOCATION="s3a://dataminded-academy-capstone-resources/raw/open_aq/"
 
@@ -86,13 +93,33 @@ def store_data_in_snowflake(df:DataFrame):
         .save()
     )
 
+
+    (
+        df.write
+        .format(SNOWFLAKE_SOURCE_NAME)
+        .options(**sfOptions)
+        .option("dbtable", "raw_open_aq_data_appended")
+        .mode("Append")
+        .save()
+    )
+
+
+    # Create a DataFrame with a single row
+#    log_df= df.sparkSession.createDataFrame([(current_timestamp(),)])
+
+#    log_df =  df.sparkSession.createDataFrame([(current_timestamp(),)], schema=["exec_date"]).toDF("exec_date", TimestampType())
+
+
     return 0
 
-print("Read data from AWS")
+logger.info("Read data from AWS")
 df=read_json_aws(AWS_LOCATION)
-print("Clean data ")
+
+logger.info("Clean data ")
 clean_df=clean_air_data(df)
-print("Store data in SnowFlake")
+
+logger.info("Store data in SnowFlake")
 store_data_in_snowflake(clean_df)
 
-print("Done")
+
+logger.info("Done")

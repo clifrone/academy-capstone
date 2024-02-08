@@ -10,7 +10,6 @@ WORKDIR /spark_aws_to_snowflake
 
 COPY spark_aws_to_snowflake/* /spark_aws_to_snowflake/
 
-COPY containerize/env .
 
 ENV AWS_ACCESS_KEY_ID = ""
 ENV AWS_SECRET_ACCESS_KEY =""
