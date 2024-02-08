@@ -1,0 +1,14 @@
+FROM public.ecr.aws/datamindedacademy/capstone:v3.4.1-hadoop-3.3.6-v1
+
+USER 0
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt 
+
+WORKDIR /spark_aws_to_snowflake 
+
+COPY ../spark_aws_to_snowflake/* /spark_aws_to_snowflake/
+
+ENTRYPOINT [ "python" ]
+CMD ["load_data_from_aws.py"]
