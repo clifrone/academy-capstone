@@ -1,3 +1,9 @@
+use database ACADEMY_CLASS_CAPSTONE_DATABASE;
+
+use schema LIVIU;
+
+
+
 select country, entity, location,sensortype,parameter, count(1), avg(value), sum(value) from raw_open_aq_data
 group by ALL
 order by 4 desc
@@ -58,10 +64,13 @@ daily_max as
         parameter, 
         year_month_day,
         daily_max_value,
-        max(daily_max_value) over (partition by location, parameter order by year_month_day rows between 6 preceding and current row) last_6_days_max
+        max(daily_max_value) over (partition by location, parameter order by year_month_day rows between 6 preceding and 1 following row) last_6_days_max
+
     from daily_max
     
 )
 select * from daily_max_month
 order by location, parameter, year_month_day;
+
+
     
