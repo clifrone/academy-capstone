@@ -1,0 +1,15 @@
+docker:
+    path: .
+id: 313dd4ea-0ed1-4a5d-b4c2-bd963b469260
+ide:
+    filename: ide.yaml
+name: licop_conveyor_project
+resources:
+    path: resources
+streaming:
+    filename: streaming.yaml
+template: ""
+version: "0.3"
+workflows:
+    path: dags
+    version: "2"

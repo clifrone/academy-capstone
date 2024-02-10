@@ -21,7 +21,7 @@ SECRET_NAME="snowflake/capstone/config"
 
 def read_json_aws(path):
     config = {
-        "spark.jars.packages":"org.apache.hadoop:hadoop-aws:3.2.0,net.snowflake:spark-snowflake_2.12:2.9.0-spark_3.1,net.snowflake:snowflake-jdbc:3.13.3",
+      #  "spark.jars.packages":"org.apache.hadoop:hadoop-aws:3.2.0,net.snowflake:spark-snowflake_2.12:2.9.0-spark_3.1,net.snowflake:snowflake-jdbc:3.13.3",
         "spark.hadoop.fs.s3a.aws.credentials.provider": "com.amazonaws.auth.DefaultAWSCredentialsProviderChain"
     }
     conf = SparkConf().setAll(config.items())

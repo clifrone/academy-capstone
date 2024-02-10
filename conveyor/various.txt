@@ -1,0 +1,18 @@
+wget https://app.conveyordata.com/api/info/cli/location/linux/amd64 -O conveyor_linux_amd64.tar.gz
+tar -zxvf conveyor_linux_amd64.tar.gz
+chmod +x bin/linux/amd64/conveyor
+cp bin/linux/amd64/conveyor /usr/local/bin/conveyor
+
+sudo conveyor completion bash | sudo tee /etc/bash_completion.d/conveyor > /dev/null
+
+conveyor auth login
+
+
+conveyor project create --name licop_conveyor_project
+
+
+conveyor project build
+
+conveyor project run --env winterschool2024
+
+conveyor project deploy --env winterschool2024
